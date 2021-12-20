@@ -4,7 +4,13 @@ PImage img, imgAlt;
 void setup() {
   img = loadImage("stegosaurus.jpg");
   size(1500, 1000);
-  img.resize(750, img.height*750/img.width);
+  if (img.height > img.width) {
+    img.resize(750, img.height*750/img.width);
+  } else {
+    img.resize(img.width*750/img.height, 750);
+  }
+  fill(255, 0, 0);
+  rect(0, 1000, 1500, -250);
   image(img, 0, 0);
   imgAlt = img.copy();
 }
