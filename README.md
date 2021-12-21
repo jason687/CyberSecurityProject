@@ -8,3 +8,7 @@ Fixed sizing issues with images, created preliminary methods to access RGB bit p
 
 12/17 
 Finished RGB bit plane methods
+
+12/20
+Completed with backend for stegsolve; planning to work on gui
+Changed up makefile to do the desired behavior
