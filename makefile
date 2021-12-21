@@ -1,2 +1,3 @@
 run:
-	processing StegJar.pde run $(ARGS)
+	sh renameFile.sh $(ARGS)
+	processing StegJar.pde
