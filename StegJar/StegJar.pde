@@ -1,6 +1,7 @@
 import java.util.*;
 PImage img, imgAlt;
 ArrayList<Button> buttons = new ArrayList();
+int planecounter = 4;
 
 void setup() {
   img = loadImage("stegosaurus.jpg");
@@ -15,16 +16,31 @@ void setup() {
   image(img, 0, 0);
   imgAlt = img.copy();
   rect(0, 1000, 1500, -250);
-  Button left = new Button(500, 500);
+  Button left = new Button(400, 800);
+  Button right = new Button(1000, 800);
+  Button center = new Button(700,800);
   buttons.add(left);
+  buttons.add(right);
+  buttons.add(center);
   
 }
 
 void draw() {
-  greenPlane(0);
+  if(planecounter / 7 == 0){
+    redPlane(planecounter % 7);
+  } else if (planecounter / 7 == 1){
+    greenPlane(planecounter % 7);
+  } else if (planecounter / 7 == 2){
+    bluePlane(planecounter % 7);
+  } else if (planecounter / 7 == 3){
+    alphaPlane(planecounter / 7);
+  } else {
+    print("Uh oh, something not good happened");
+  }
+  
   image(imgAlt, 750, 0);
   for(Button i : buttons){
-    i.update(mouseX, mouseY);
+    i.update();
     
     if (i.rectOver) {
       fill(i.rectHighlight);
@@ -105,7 +121,7 @@ class Button{
   }
   
   void draw() {
-    update(mouseX, mouseY);
+    update();
     
     if (rectOver) {
       fill(rectHighlight);
@@ -116,7 +132,7 @@ class Button{
     rect(rectX, rectY, rectSize, rectSize);
   }
   
-  void update(int x, int y) {
+  void update() {
     rectOver = overRect(rectX, rectY, rectSize, rectSize);
   }
   
