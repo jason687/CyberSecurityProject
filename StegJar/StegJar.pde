@@ -4,7 +4,7 @@ ArrayList<Button> buttons = new ArrayList();
 int planecounter = 4;
 
 void setup() {
-  img = loadImage("stegosaurus.jpg");
+  img = loadImage("stegosaurus.png");
   size(1500, 1000);
   if (img.height > img.width) {
     img.resize(750, img.height*750/img.width);
@@ -100,64 +100,65 @@ void alphaPlane(int plane) {
   }
 }
 
-//buttons
+////buttons
 
-class Button{
-  int rectX, rectY;      // Position of square button
-  int rectSize = 90;     // Diameter of rect
-  color rectColor, baseColor;
-  color rectHighlight;
-  color currentColor;
-  boolean rectOver = false;
+//class Button{
+//  int rectX, rectY;      // Position of square button
+//  int rectSize = 90;     // Diameter of rect
+//  color rectColor, baseColor;
+//  color rectHighlight;
+//  color currentColor;
+//  boolean rectOver = false;
   
-  Button (int x, int y){
-    rectColor = color(0);
-    rectHighlight = color(51);
-    baseColor = color(102);
-    currentColor = baseColor;
-    rectX = x;
-    rectY = y;
+//  Button (int x, int y){
+//    rectColor = color(0);
+//    rectHighlight = color(51);
+//    baseColor = color(102);
+//    currentColor = baseColor;
+//    rectX = x;
+//    rectY = y;
 
-  }
+//  }
   
-  void draw() {
-    update();
+//  void draw() {
+//    update();
     
-    if (rectOver) {
-      fill(rectHighlight);
-    } else {
-      fill(rectColor);
-    }
-    stroke(255);
-    rect(rectX, rectY, rectSize, rectSize);
-  }
+//    if (rectOver) {
+//      fill(rectHighlight);
+//    } else {
+//      fill(rectColor);
+//    }
+//    stroke(255);
+//    rect(rectX, rectY, rectSize, rectSize);
+//    mousePressed();
+//  }
   
-  void update() {
-    rectOver = overRect(rectX, rectY, rectSize, rectSize);
-  }
+//  void update() {
+//    rectOver = overRect(rectX, rectY, rectSize, rectSize);
+//  }
   
-  void mousePressed() {
-    //do something with plane switching
-  }
+//  void mousePressed() {
+//    print("abc");
+//  }
   
-  boolean overRect(int x, int y, int width, int height)  {
-    if (mouseX >= x && mouseX <= x+width && 
-        mouseY >= y && mouseY <= y+height) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+//  boolean overRect(int x, int y, int width, int height)  {
+//    if (mouseX >= x && mouseX <= x+width && 
+//        mouseY >= y && mouseY <= y+height) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
   
-  boolean overCircle(int x, int y, int diameter) {
-    float disX = x - mouseX;
-    float disY = y - mouseY;
-    if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
+//  boolean overCircle(int x, int y, int diameter) {
+//    float disX = x - mouseX;
+//    float disY = y - mouseY;
+//    if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
+//}
   
   
