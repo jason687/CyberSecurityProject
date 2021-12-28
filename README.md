@@ -12,3 +12,12 @@ Finished RGB bit plane methods
 12/20
 Completed with backend for stegsolve; planning to work on gui
 Changed up makefile to do the desired behavior
+
+12/21
+Bug fixes
+
+12/23
+Ryan: Created buttons
+
+12/27
+Jason: Added functionality to button
