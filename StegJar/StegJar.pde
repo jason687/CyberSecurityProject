@@ -1,7 +1,7 @@
 import java.util.*;
 PImage img, imgAlt;
 ArrayList<Button> buttons = new ArrayList();
-int planecounter = 4;
+int planecounter = 0;
 
 void setup() {
   img = loadImage("stegosaurus.png");
@@ -18,7 +18,7 @@ void setup() {
   rect(0, 1000, 1500, -250);
   Button left = new Button(400, 800);
   Button right = new Button(1000, 800);
-  Button center = new Button(700,800);
+  Button center = new Button(700, 800);
   buttons.add(left);
   buttons.add(right);
   buttons.add(center);
@@ -26,18 +26,29 @@ void setup() {
 }
 
 void draw() {
-  if(planecounter / 7 == 0){
-    redPlane(planecounter % 7);
-  } else if (planecounter / 7 == 1){
-    greenPlane(planecounter % 7);
-  } else if (planecounter / 7 == 2){
-    bluePlane(planecounter % 7);
-  } else if (planecounter / 7 == 3){
-    alphaPlane(planecounter / 7);
-  } else {
-    print("Uh oh, something not good happened");
+  switch (planecounter) {
+    case 0: redPlane(planecounter); imgAlt.updatePixels();
+    case 1: redPlane(planecounter); imgAlt.updatePixels();
+    case 2: redPlane(planecounter); imgAlt.updatePixels();
+    case 3: redPlane(planecounter); imgAlt.updatePixels();
+    case 4: redPlane(planecounter); imgAlt.updatePixels();
+    case 5: redPlane(planecounter); imgAlt.updatePixels();
+    case 6: redPlane(planecounter); imgAlt.updatePixels();
+    case 7: redPlane(planecounter); imgAlt.updatePixels();
+    
+  //if(planecounter / 7 == 0){
+  //  redPlane(planecounter % 7);
+  //} else if (planecounter / 7 == 1){
+  //  greenPlane(planecounter % 7);
+  //} else if (planecounter / 7 == 2){
+  //  bluePlane(planecounter % 7);
+  //} else if (planecounter / 7 == 3){
+  //  alphaPlane(planecounter / 7);
+  //} else {
+  //  print("Uh oh, something not good happened");
   }
   
+
   image(imgAlt, 750, 0);
   for(Button i : buttons){
     i.update();
@@ -49,6 +60,31 @@ void draw() {
     }
     stroke(255);
     rect(i.rectX, i.rectY, i.rectSize, i.rectSize);
+  }
+}
+
+void mousePressed() {
+  if (mousePressed) {
+    if (mouseButton == 37) {
+      if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
+        if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
+          planecounter -= 1;
+          if (planecounter < 0) {
+            planecounter = 7;
+          }
+          print(planecounter);
+        }
+      }
+      if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
+        if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
+          planecounter += 1;
+          if (planecounter > 7) {
+            planecounter = 0;
+          }
+          print(planecounter);
+        }
+      }
+    }
   }
 }
 

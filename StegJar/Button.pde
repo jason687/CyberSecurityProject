@@ -16,26 +16,29 @@ public class Button {
 
   }
   
-  void draw() {
-    update();
+  //void draw() {
+  //  update();
     
-    if (rectOver) {
-      fill(rectHighlight);
-    } else {
-      fill(rectColor);
-    }
-    stroke(255);
-    rect(rectX, rectY, rectSize, rectSize);
-    mousePressed();
-  }
+  //  if (rectOver) {
+  //    fill(rectHighlight);
+  //  } else {
+  //    fill(rectColor);
+  //  }
+  //  stroke(255);
+  //  rect(rectX, rectY, rectSize, rectSize);
+  //}
+  // in StegJar draw; unecessary
   
   void update() {
     rectOver = overRect(rectX, rectY, rectSize, rectSize);
   }
   
-  void mousePressed() {
-    print("abc");
-  }
+  //void mousePressed() {
+  //  if (mousePressed) {
+  //    print("12#");
+  //  }
+  //}
+  // i don't believe it does anthing here; has to be in main class
   
   boolean overRect(int x, int y, int width, int height)  {
     if (mouseX >= x && mouseX <= x+width && 
@@ -54,5 +57,13 @@ public class Button {
     } else {
       return false;
     }
+  }
+  
+  int getX() {
+    return rectX;
+  }
+  
+  int getY() {
+    return rectY;
   }
 }
