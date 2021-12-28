@@ -27,14 +27,14 @@ void setup() {
 
 void draw() {
   switch (planecounter) {
-    case 0: redPlane(planecounter); imgAlt.updatePixels();
-    case 1: redPlane(planecounter); imgAlt.updatePixels();
-    case 2: redPlane(planecounter); imgAlt.updatePixels();
-    case 3: redPlane(planecounter); imgAlt.updatePixels();
-    case 4: redPlane(planecounter); imgAlt.updatePixels();
-    case 5: redPlane(planecounter); imgAlt.updatePixels();
-    case 6: redPlane(planecounter); imgAlt.updatePixels();
-    case 7: redPlane(planecounter); imgAlt.updatePixels();
+    case 0: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 0, redPlane(0);
+    case 1: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 1, redPlane(1);
+    case 2: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 2, redPlane(2);
+    case 3: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 3, redPlane(3);
+    case 4: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 4, redPlane(4);
+    case 5: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 5, redPlane(5);
+    case 6: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 6, redPlane(6);
+    case 7: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 7, redPlane(7);
     
   //if(planecounter / 7 == 0){
   //  redPlane(planecounter % 7);
@@ -66,22 +66,24 @@ void draw() {
 void mousePressed() {
   if (mousePressed) {
     if (mouseButton == 37) {
+      //right button, DECREASES planecounter (optionally change by changing buttons.get(1) to buttons.get(0)
       if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
         if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
           planecounter -= 1;
           if (planecounter < 0) {
             planecounter = 7;
           }
-          print(planecounter);
+          //print(planecounter);
         }
       }
+      //left button, INCREASES planecounter (optionally change by changing buttons.get(0) to buttons.get(1)
       if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
         if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
           planecounter += 1;
           if (planecounter > 7) {
             planecounter = 0;
           }
-          print(planecounter);
+          //print(planecounter);
         }
       }
     }
