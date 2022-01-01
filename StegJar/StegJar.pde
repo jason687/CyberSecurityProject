@@ -1,10 +1,12 @@
 import java.util.*;
-PImage img, imgAlt;
+PImage img, imgAlt, imgDraw;
 ArrayList<Button> buttons = new ArrayList();
 int planecounter = 0; // 0 = 
 int plane = 0;
 boolean penToggle = false;
-boolean onImg = true;
+boolean onImg = false;
+boolean imgAltered = false;
+
 void setup() {
   textAlign(CENTER);
   img = loadImage("stegosaurus.png");
@@ -23,25 +25,33 @@ void setup() {
   buttons.add(right);
   buttons.add(center);
   buttons.add(pen);
-  
-}
-
-void draw() {
   background(0);
   fill(255, 0, 0); // control panel bg color
   stroke(255,0,0);
   image(img, 0, 0);
   imgAlt = img.copy();
+  imgDraw = img.copy();
   rect(0, 750, 1500, 250);
-  
-  boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
-  switch (plane){
-    case 0: original = true; break;
-    case 1: redPlane(planecounter); imgAlt.updatePixels(); break;
-    case 2: greenPlane(planecounter); imgAlt.updatePixels(); break;
-    case 3: bluePlane(planecounter); imgAlt.updatePixels(); break;
-    case 4: alphaPlane(planecounter); imgAlt.updatePixels(); break;
-  } 
+}
+
+void draw() {  
+  //boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
+  boolean overButton = false;
+  for (int i = 0; i < buttons.size() - 1; i++) {
+    buttons.get(i).update();
+    if (buttons.get(i).rectOver) {
+      overButton = true;
+    }
+  }
+  if (overButton && mousePressed) {
+    switch (plane) {
+      case 0: originalPlane(); imgAlt.updatePixels(); break;
+      case 1: redPlane(planecounter); imgAlt.updatePixels(); break;
+      case 2: greenPlane(planecounter); imgAlt.updatePixels(); break;
+      case 3: bluePlane(planecounter); imgAlt.updatePixels(); break;
+      case 4: alphaPlane(planecounter); imgAlt.updatePixels(); break;
+    }
+  }
 
   image(imgAlt, 750, 0);
   for(Button i : buttons){
@@ -56,15 +66,21 @@ void draw() {
     rect(i.rectX, i.rectY, i.rectSize, i.rectSize);
     i.displayText();
   }
-  if(original){
-    image(img, 750, 0);
-  }
   displayCounter();
+  if (mouseX > 750 & mouseY < 750) {
+    onImg = true;
+  } else {
+    onImg = false;
+  }
   if(penToggle && onImg){
     //line(mouseX, mouseY, pmouseX,pmouseY);
     circle(mouseX, mouseY, 5);//pen tracking
   }
   
+  if(imgAltered) {
+    imgAlt.updatePixels();
+    imgAltered = false;
+  }
 }
 
 void displayCounter(){
@@ -86,7 +102,8 @@ void mousePressed() {
   if (mousePressed) {
     if (mouseButton == 37) {
       //check if on img
-      if (true){
+      if (penToggle && onImg) {
+        drawPlane(5);
       }
       
       
@@ -146,7 +163,7 @@ void mousePressed() {
   }
   //print(plane + " ");
   //println(planecounter);
-  print(penToggle);
+  //print(penToggle);
 }
 
 
@@ -205,6 +222,35 @@ void alphaPlane(int plane) {
       int i = x + y*img.width;
       int a = (int) alpha(img.pixels[i]) & digit;
       imgAlt.pixels[i] = color(a / digit * 255);
+    }
+  }
+}
+
+void drawPlane(int thickness) { //thickness radius
+  //setting boundaries
+  int leftX = mouseX - thickness;
+  int upY = mouseY - thickness;
+  int rightX = mouseX + thickness;
+  int downY = mouseY + thickness;
+  if (leftX < 750) {
+    leftX = 750;
+  }
+  if (upY < 0) {
+    upY = 0;
+  }
+  if (rightX > 1500) {
+    leftX = 1500;
+  }
+  if (downY > 750) {
+    upY = 750;
+  }
+  loadPixels();
+  for (int x = leftX; x < rightX; x++) {
+    for (int y = upY; y < downY; y++) {
+      if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness, 2)) {
+        imgAlt.pixels[x - 750 + y*img.width] = color(255);
+        imgAltered = true;
+      }
     }
   }
 }
