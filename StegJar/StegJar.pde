@@ -15,7 +15,7 @@ void setup() {
   
   Button left = new Button(400, 800, "left");
   Button right = new Button(1000, 800, "right");
-  Button center = new Button(700, 800, "original image");
+  Button center = new Button(705, 800, "original image");
   buttons.add(left);
   buttons.add(right);
   buttons.add(center);
@@ -24,10 +24,12 @@ void setup() {
 
 void draw() {
   background(0);
-  fill(255, 0, 0);
+  fill(255, 0, 0); // control panel bg color
+  stroke(255,0,0);
   image(img, 0, 0);
   imgAlt = img.copy();
-  rect(0, 1000, 1500, -250);
+  rect(0, 750, 1500, 250);
+  
   boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
   switch (plane){
     case 0: original = true; break;
@@ -35,32 +37,7 @@ void draw() {
     case 2: greenPlane(planecounter); imgAlt.updatePixels(); break;
     case 3: bluePlane(planecounter); imgAlt.updatePixels(); break;
     case 4: alphaPlane(planecounter); imgAlt.updatePixels(); break;
-  }
-  
-  
-  
-  //switch (planecounter) {
-  //  case 0: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 0, redPlane(0);
-  //  case 1: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 1, redPlane(1);
-  //  case 2: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 2, redPlane(2);
-  //  case 3: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 3, redPlane(3);
-  //  case 4: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 4, redPlane(4);
-  //  case 5: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 5, redPlane(5);
-  //  case 6: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 6, redPlane(6);
-  //  case 7: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 7, redPlane(7);
-    
-  ////if(planecounter / 7 == 0){
-  ////  redPlane(planecounter % 7);
-  ////} else if (planecounter / 7 == 1){
-  ////  greenPlane(planecounter % 7);
-  ////} else if (planecounter / 7 == 2){
-  ////  bluePlane(planecounter % 7);
-  ////} else if (planecounter / 7 == 3){
-  ////  alphaPlane(planecounter / 7);
-  ////} else {
-  ////  print("Uh oh, something not good happened");
-  //}
-  
+  } 
 
   image(imgAlt, 750, 0);
   for(Button i : buttons){
@@ -78,8 +55,23 @@ void draw() {
   if(original){
     image(img, 750, 0);
   }
-  text(""+plane + " " + planecounter, 700, 800);
+  displayCounter();
 }
+
+void displayCounter(){
+  fill(255); // planecounter bg color
+  stroke(0);
+  rect(0, 750, 1500, 30);
+  fill(0);
+  switch (plane){
+    case 0: text("Original image", 750, 775); break;
+    case 1: text("Red plane " + planecounter, 750, 775); break;
+    case 2: text("Green plane " + planecounter, 750, 775); break;
+    case 3: text("Blue plane " + planecounter, 750, 775); break;
+    case 4: text("Alpha plane " + planecounter, 750, 775); break;
+  } 
+}
+
 
 void mousePressed() {
   if (mousePressed) {
@@ -128,9 +120,11 @@ void mousePressed() {
       }
     }
   }
-  print(plane + " ");
-  println(planecounter);
+  //print(plane + " ");
+  //println(planecounter);
 }
+
+
 
 void originalPlane(){
   loadPixels();
