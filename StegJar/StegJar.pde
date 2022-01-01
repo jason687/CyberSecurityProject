@@ -65,10 +65,10 @@ void displayCounter(){
   fill(0);
   switch (plane){
     case 0: text("Original image", 750, 775); break;
-    case 1: text("Red plane " + planecounter, 750, 775); break;
-    case 2: text("Green plane " + planecounter, 750, 775); break;
-    case 3: text("Blue plane " + planecounter, 750, 775); break;
-    case 4: text("Alpha plane " + planecounter, 750, 775); break;
+    case 1: text("Red plane " + (planecounter+1), 750, 775); break;
+    case 2: text("Green plane " + (planecounter+1), 750, 775); break;
+    case 3: text("Blue plane " + (planecounter+1), 750, 775); break;
+    case 4: text("Alpha plane " + (planecounter+1), 750, 775); break;
   } 
 }
 
