@@ -4,6 +4,7 @@ ArrayList<Button> buttons = new ArrayList();
 int planecounter = 0; // 0 = 
 int plane = 2;
 void setup() {
+  textAlign(CENTER);
   img = loadImage("stegosaurus.png");
   size(1500, 1000);
   if (img.height > img.width) {
@@ -16,9 +17,9 @@ void setup() {
   image(img, 0, 0);
   imgAlt = img.copy();
   rect(0, 1000, 1500, -250);
-  Button left = new Button(400, 800);
-  Button right = new Button(1000, 800);
-  Button center = new Button(700, 800);
+  Button left = new Button(400, 800, "left");
+  Button right = new Button(1000, 800, "right");
+  Button center = new Button(700, 800, "original image");
   buttons.add(left);
   buttons.add(right);
   buttons.add(center);
@@ -71,6 +72,7 @@ void draw() {
     }
     stroke(255);
     rect(i.rectX, i.rectY, i.rectSize, i.rectSize);
+    i.displayText();
   }
   if(original){
     image(img, 750, 0);
@@ -84,6 +86,10 @@ void mousePressed() {
       //right button, DECREASES planecounter (optionally change by changing buttons.get(1) to buttons.get(0)
       if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
         if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
+          //if(plane == 0){
+          //  plane = 4;
+          //  return;
+          //}
           planecounter -= 1;
           if (planecounter < 0) {
             planecounter = 7;
@@ -98,6 +104,10 @@ void mousePressed() {
       //left button, INCREASES planecounter (optionally change by changing buttons.get(0) to buttons.get(1)
       if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
         if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
+          //if(plane == 0){
+          //  plane = 1;
+          //  return;
+          //}
           planecounter += 1;
           if (planecounter > 7) {
             planecounter = 0;
@@ -111,8 +121,8 @@ void mousePressed() {
       }
     }
   }
-  //print(planecounter + " ");
-  //println(plane);
+  print(planecounter + " ");
+  println(plane);
 }
 
 void originalPlane(){
@@ -172,66 +182,3 @@ void alphaPlane(int plane) {
     }
   }
 }
-
-////buttons
-
-//class Button{
-//  int rectX, rectY;      // Position of square button
-//  int rectSize = 90;     // Diameter of rect
-//  color rectColor, baseColor;
-//  color rectHighlight;
-//  color currentColor;
-//  boolean rectOver = false;
-  
-//  Button (int x, int y){
-//    rectColor = color(0);
-//    rectHighlight = color(51);
-//    baseColor = color(102);
-//    currentColor = baseColor;
-//    rectX = x;
-//    rectY = y;
-
-//  }
-  
-//  void draw() {
-//    update();
-    
-//    if (rectOver) {
-//      fill(rectHighlight);
-//    } else {
-//      fill(rectColor);
-//    }
-//    stroke(255);
-//    rect(rectX, rectY, rectSize, rectSize);
-//    mousePressed();
-//  }
-  
-//  void update() {
-//    rectOver = overRect(rectX, rectY, rectSize, rectSize);
-//  }
-  
-//  void mousePressed() {
-//    print("abc");
-//  }
-  
-//  boolean overRect(int x, int y, int width, int height)  {
-//    if (mouseX >= x && mouseX <= x+width && 
-//        mouseY >= y && mouseY <= y+height) {
-//      return true;
-//    } else {
-//      return false;
-//    }
-//  }
-  
-//  boolean overCircle(int x, int y, int diameter) {
-//    float disX = x - mouseX;
-//    float disY = y - mouseY;
-//    if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
-//      return true;
-//    } else {
-//      return false;
-//    }
-//  }
-//}
-  
-  
