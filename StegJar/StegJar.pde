@@ -12,11 +12,7 @@ void setup() {
   } else {
     img.resize(img.width*750/img.height, 750);
   }
-  fill(255, 0, 0);
   
-  image(img, 0, 0);
-  imgAlt = img.copy();
-  rect(0, 1000, 1500, -250);
   Button left = new Button(400, 800, "left");
   Button right = new Button(1000, 800, "right");
   Button center = new Button(700, 800, "original image");
@@ -27,6 +23,11 @@ void setup() {
 }
 
 void draw() {
+  background(0);
+  fill(255, 0, 0);
+  image(img, 0, 0);
+  imgAlt = img.copy();
+  rect(0, 1000, 1500, -250);
   boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
   switch (plane){
     case 0: original = true; break;
@@ -77,17 +78,18 @@ void draw() {
   if(original){
     image(img, 750, 0);
   }
-  
+  text(""+plane + " " + planecounter, 700, 800);
 }
 
 void mousePressed() {
   if (mousePressed) {
     if (mouseButton == 37) {
-      //right button, DECREASES planecounter (optionally change by changing buttons.get(1) to buttons.get(0)
-      if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
-        if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
+      //right button, INCREASES planecounter
+      if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
+        if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
           if(plane == 0){
             plane = 4;
+            planecounter = 7;
             print(plane + " ");
             println(planecounter);
             return;
@@ -103,11 +105,12 @@ void mousePressed() {
           //print(planecounter);
         }
       }
-      //left button, INCREASES planecounter (optionally change by changing buttons.get(0) to buttons.get(1)
-      if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
-        if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
+      //left button, DECREASES planecounter
+      if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
+        if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
           if(plane == 0){
             plane = 1;
+            planecounter = 0;
             print(plane + " ");
             println(planecounter);
             return;
