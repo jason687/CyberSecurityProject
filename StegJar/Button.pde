@@ -5,17 +5,20 @@ public class Button {
   color rectHighlight;
   color currentColor;
   boolean rectOver = false;
+  String text = "";
   
-  public Button (int x, int y){
-    rectColor = color(0);
-    rectHighlight = color(51);
-    baseColor = color(102);
+  public Button (int x, int y, String txt){
+    rectColor = color(100);
+    rectHighlight = color(150);
+    baseColor = color(255);
     currentColor = baseColor;
     rectX = x;
     rectY = y;
+    text = txt;
 
   }
   
+
   //void draw() {
   //  update();
     
@@ -30,9 +33,15 @@ public class Button {
   // in StegJar draw; unecessary
   
   void update() {
+    
     rectOver = overRect(rectX, rectY, rectSize, rectSize);
+    
   }
   
+  void displayText(){
+    fill(255);
+    text(text, rectX+45, rectY+45);
+  }
   //void mousePressed() {
   //  if (mousePressed) {
   //    print("12#");
