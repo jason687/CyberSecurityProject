@@ -3,6 +3,8 @@ PImage img, imgAlt;
 ArrayList<Button> buttons = new ArrayList();
 int planecounter = 0; // 0 = 
 int plane = 0;
+boolean penToggle = false;
+boolean onImg = true;
 void setup() {
   textAlign(CENTER);
   img = loadImage("stegosaurus.png");
@@ -16,9 +18,11 @@ void setup() {
   Button left = new Button(400, 800, "left");
   Button right = new Button(1000, 800, "right");
   Button center = new Button(705, 800, "original image");
+  Button pen = new Button(400, 900, "pen");
   buttons.add(left);
   buttons.add(right);
   buttons.add(center);
+  buttons.add(pen);
   
 }
 
@@ -56,6 +60,11 @@ void draw() {
     image(img, 750, 0);
   }
   displayCounter();
+  if(penToggle && onImg){
+    //line(mouseX, mouseY, pmouseX,pmouseY);
+    circle(mouseX, mouseY, 5);//pen tracking
+  }
+  
 }
 
 void displayCounter(){
@@ -76,6 +85,18 @@ void displayCounter(){
 void mousePressed() {
   if (mousePressed) {
     if (mouseButton == 37) {
+      //check if on img
+      if (true){
+      }
+      
+      
+      //penToggle button
+      if (mouseY < buttons.get(3).getY() + 90 && mouseY > buttons.get(3).getY()) {
+        if (mouseX < buttons.get(3).getX() + 90 && mouseX > buttons.get(3).getX()) {
+          penToggle = !penToggle;
+        }
+      }
+      
       //right button, INCREASES planecounter
       if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
         if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
@@ -125,6 +146,7 @@ void mousePressed() {
   }
   //print(plane + " ");
   //println(planecounter);
+  print(penToggle);
 }
 
 
