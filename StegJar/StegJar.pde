@@ -82,8 +82,6 @@ void mousePressed() {
           if(plane == 0){
             plane = 4;
             planecounter = 7;
-            print(plane + " ");
-            println(planecounter);
             return;
           }
           planecounter -= 1;
@@ -103,8 +101,6 @@ void mousePressed() {
           if(plane == 0){
             plane = 1;
             planecounter = 0;
-            print(plane + " ");
-            println(planecounter);
             return;
           }
           planecounter += 1;
@@ -116,6 +112,13 @@ void mousePressed() {
             }
           }
           //print(planecounter);
+        }
+      }
+      // original img/ center button, planecounter = 0, plane = 0
+      if (mouseY < buttons.get(2).getY() + 90 && mouseY > buttons.get(2).getY()) {
+        if (mouseX < buttons.get(2).getX() + 90 && mouseX > buttons.get(2).getX()) {
+          plane = 0;
+          planecounter = 0;
         }
       }
     }
