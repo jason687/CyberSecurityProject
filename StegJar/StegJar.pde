@@ -87,6 +87,10 @@ void mousePressed() {
           planecounter -= 1;
           if (planecounter < 0) {
             planecounter = 7;
+            plane -= 1;
+            if (plane < 0){
+              plane = 4;
+            }
           }
           //print(planecounter);
         }
@@ -97,12 +101,18 @@ void mousePressed() {
           planecounter += 1;
           if (planecounter > 7) {
             planecounter = 0;
+            plane += 1;
+            if (plane > 4){
+              plane = 0;
+            }
           }
           //print(planecounter);
         }
       }
     }
   }
+  //print(planecounter + " ");
+  //println(plane);
 }
 
 void originalPlane(){
