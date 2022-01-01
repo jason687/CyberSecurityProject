@@ -2,7 +2,7 @@ import java.util.*;
 PImage img, imgAlt;
 ArrayList<Button> buttons = new ArrayList();
 int planecounter = 0; // 0 = 
-int plane = 2;
+int plane = 0;
 void setup() {
   textAlign(CENTER);
   img = loadImage("stegosaurus.png");
@@ -86,10 +86,12 @@ void mousePressed() {
       //right button, DECREASES planecounter (optionally change by changing buttons.get(1) to buttons.get(0)
       if (mouseY < buttons.get(1).getY() + 90 && mouseY > buttons.get(1).getY()) {
         if (mouseX < buttons.get(1).getX() + 90 && mouseX > buttons.get(1).getX()) {
-          //if(plane == 0){
-          //  plane = 4;
-          //  return;
-          //}
+          if(plane == 0){
+            plane = 4;
+            print(plane + " ");
+            println(planecounter);
+            return;
+          }
           planecounter -= 1;
           if (planecounter < 0) {
             planecounter = 7;
@@ -104,10 +106,12 @@ void mousePressed() {
       //left button, INCREASES planecounter (optionally change by changing buttons.get(0) to buttons.get(1)
       if (mouseY < buttons.get(0).getY() + 90 && mouseY > buttons.get(0).getY()) {
         if (mouseX < buttons.get(0).getX() + 90 && mouseX > buttons.get(0).getX()) {
-          //if(plane == 0){
-          //  plane = 1;
-          //  return;
-          //}
+          if(plane == 0){
+            plane = 1;
+            print(plane + " ");
+            println(planecounter);
+            return;
+          }
           planecounter += 1;
           if (planecounter > 7) {
             planecounter = 0;
@@ -121,8 +125,8 @@ void mousePressed() {
       }
     }
   }
-  print(planecounter + " ");
-  println(plane);
+  print(plane + " ");
+  println(planecounter);
 }
 
 void originalPlane(){
