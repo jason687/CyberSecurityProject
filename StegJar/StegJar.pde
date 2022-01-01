@@ -1,8 +1,8 @@
 import java.util.*;
 PImage img, imgAlt;
 ArrayList<Button> buttons = new ArrayList();
-int planecounter = 0;
-
+int planecounter = 0; // 0 = 
+int plane = 2;
 void setup() {
   img = loadImage("stegosaurus.png");
   size(1500, 1000);
@@ -26,27 +26,38 @@ void setup() {
 }
 
 void draw() {
-  switch (planecounter) {
-    case 0: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 0, redPlane(0);
-    case 1: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 1, redPlane(1);
-    case 2: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 2, redPlane(2);
-    case 3: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 3, redPlane(3);
-    case 4: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 4, redPlane(4);
-    case 5: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 5, redPlane(5);
-    case 6: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 6, redPlane(6);
-    case 7: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 7, redPlane(7);
-    
-  //if(planecounter / 7 == 0){
-  //  redPlane(planecounter % 7);
-  //} else if (planecounter / 7 == 1){
-  //  greenPlane(planecounter % 7);
-  //} else if (planecounter / 7 == 2){
-  //  bluePlane(planecounter % 7);
-  //} else if (planecounter / 7 == 3){
-  //  alphaPlane(planecounter / 7);
-  //} else {
-  //  print("Uh oh, something not good happened");
+  boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
+  switch (plane){
+    case 0: original = true; break;
+    case 1: redPlane(planecounter); imgAlt.updatePixels(); break;
+    case 2: greenPlane(planecounter); imgAlt.updatePixels(); break;
+    case 3: bluePlane(planecounter); imgAlt.updatePixels(); break;
+    case 4: alphaPlane(planecounter); imgAlt.updatePixels(); break;
   }
+  
+  
+  
+  //switch (planecounter) {
+  //  case 0: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 0, redPlane(0);
+  //  case 1: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 1, redPlane(1);
+  //  case 2: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 2, redPlane(2);
+  //  case 3: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 3, redPlane(3);
+  //  case 4: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 4, redPlane(4);
+  //  case 5: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 5, redPlane(5);
+  //  case 6: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 6, redPlane(6);
+  //  case 7: redPlane(planecounter); imgAlt.updatePixels(); //if planecounter = 7, redPlane(7);
+    
+  ////if(planecounter / 7 == 0){
+  ////  redPlane(planecounter % 7);
+  ////} else if (planecounter / 7 == 1){
+  ////  greenPlane(planecounter % 7);
+  ////} else if (planecounter / 7 == 2){
+  ////  bluePlane(planecounter % 7);
+  ////} else if (planecounter / 7 == 3){
+  ////  alphaPlane(planecounter / 7);
+  ////} else {
+  ////  print("Uh oh, something not good happened");
+  //}
   
 
   image(imgAlt, 750, 0);
@@ -61,6 +72,10 @@ void draw() {
     stroke(255);
     rect(i.rectX, i.rectY, i.rectSize, i.rectSize);
   }
+  if(original){
+    image(img, 750, 0);
+  }
+  
 }
 
 void mousePressed() {
@@ -86,6 +101,16 @@ void mousePressed() {
           //print(planecounter);
         }
       }
+    }
+  }
+}
+
+void originalPlane(){
+  loadPixels();
+  for (int x = 0; x < img.width; x++) {
+    for (int y = 0; y < img.height; y++ ) {
+      int i = x + y*img.width;
+      imgAlt.pixels[i] = color( red(img.pixels[i]) , green(img.pixels[i]) , blue(img.pixels[i]) );
     }
   }
 }
