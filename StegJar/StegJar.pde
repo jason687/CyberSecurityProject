@@ -16,6 +16,7 @@ void setup() {
   } else {
     img.resize(img.width*750/img.height, 750);
   }
+  frameRate(120);
   
   Button left = new Button(400, 800, "left");
   Button right = new Button(1000, 800, "right");
@@ -81,6 +82,14 @@ void draw() {
   //  imgAlt.updatePixels();
   //  imgAltered = false;
   //}
+  if (mousePressed) {
+    //check if on img
+    if (penToggle && onImg) {
+      drawPlane(5);
+    } else {
+      drawPlane(0);
+    }
+  }
 }
 
 void displayCounter(){
@@ -101,11 +110,6 @@ void displayCounter(){
 void mousePressed() {
   if (mousePressed) {
     if (mouseButton == 37) {
-      //check if on img
-      if (penToggle && onImg) {
-        drawPlane(5);
-      }
-      
       
       //penToggle button
       if (mouseY < buttons.get(3).getY() + 90 && mouseY > buttons.get(3).getY()) {
@@ -228,30 +232,33 @@ void alphaPlane(int plane) {
 
 void drawPlane(int thickness) { //thickness radius
   //setting boundaries
-  int leftX = mouseX - thickness;
-  int upY = mouseY - thickness;
-  int rightX = mouseX + thickness;
-  int downY = mouseY + thickness;
-  if (leftX < 750) {
-    leftX = 750;
-  }
-  if (upY < 0) {
-    upY = 0;
-  }
-  if (rightX > 1500) {
-    leftX = 1500;
-  }
-  if (downY > 750) {
-    upY = 750;
-  }
-  loadPixels();
-  for (int x = leftX; x < rightX; x++) {
-    for (int y = upY; y < downY; y++) {
-      if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness, 2)) {
-        imgAlt.pixels[x - 750 + y*img.width] = color(0);
-        imgAltered = true;
+  //while (true) {
+    
+    int leftX = mouseX - thickness;
+    int upY = mouseY - thickness;
+    int rightX = mouseX + thickness;
+    int downY = mouseY + thickness;
+    if (leftX < 750) {
+      leftX = 750;
+    }
+    if (upY < 0) {
+      upY = 0;
+    }
+    if (rightX > 1500) {
+      rightX = 1500;
+    }
+    if (downY > 750) {
+      downY = 750;
+    }
+    loadPixels();
+    for (int x = leftX; x < rightX; x++) {
+      for (int y = upY; y < downY; y++) {
+        if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness, 2)) {
+          imgAlt.pixels[x - 750 + y*img.width] = color(0);
+          imgAltered = true;
+        }
       }
     }
-  }
-  imgAlt.updatePixels();
+    imgAlt.updatePixels();
+  //}
 }
