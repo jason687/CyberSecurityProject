@@ -77,10 +77,10 @@ void draw() {
     circle(mouseX, mouseY, 5);//pen tracking
   }
   
-  if(imgAltered) {
-    imgAlt.updatePixels();
-    imgAltered = false;
-  }
+  //if(imgAltered) {
+  //  imgAlt.updatePixels();
+  //  imgAltered = false;
+  //}
 }
 
 void displayCounter(){
@@ -248,9 +248,10 @@ void drawPlane(int thickness) { //thickness radius
   for (int x = leftX; x < rightX; x++) {
     for (int y = upY; y < downY; y++) {
       if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness, 2)) {
-        imgAlt.pixels[x - 750 + y*img.width] = color(255);
+        imgAlt.pixels[x - 750 + y*img.width] = color(0);
         imgAltered = true;
       }
     }
   }
+  imgAlt.updatePixels();
 }
