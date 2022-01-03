@@ -6,6 +6,7 @@ int plane = 0;
 boolean penToggle = false;
 boolean onImg = false;
 boolean imgAltered = false;
+int penThickness = 10;
 
 void setup() {
   textAlign(CENTER);
@@ -16,7 +17,7 @@ void setup() {
   } else {
     img.resize(img.width*750/img.height, 750);
   }
-  frameRate(120);
+  frameRate(1000);
   
   Button left = new Button(400, 800, "left");
   Button right = new Button(1000, 800, "right");
@@ -36,6 +37,9 @@ void setup() {
 }
 
 void draw() {  
+  image(img, 0, 0);
+  fill(255, 0, 0);
+  rect(0, 750, 1500, 250);
   //boolean original = false; // cheating here because code - case 0 is original, theres an if statement at the end that tells it to just display the regular image if it is the original
   boolean overButton = false;
   for (int i = 0; i < buttons.size() - 1; i++) {
@@ -75,7 +79,7 @@ void draw() {
   }
   if(penToggle && onImg){
     //line(mouseX, mouseY, pmouseX,pmouseY);
-    circle(mouseX, mouseY, 5);//pen tracking
+    circle(mouseX, mouseY, penThickness);//pen tracking
   }
   
   //if(imgAltered) {
@@ -85,7 +89,7 @@ void draw() {
   if (mousePressed) {
     //check if on img
     if (penToggle && onImg) {
-      drawPlane(5);
+      drawPlane(penThickness);
     } else {
       drawPlane(0);
     }
@@ -170,7 +174,16 @@ void mousePressed() {
   //print(penToggle);
 }
 
-
+void mouseWheel(MouseEvent event) {
+  if (event.getCount() > 0) {
+    penThickness += 1;
+  } else {
+    if (event.getCount() < 0) {
+      penThickness -= 1;
+    }
+  }
+}
+    
 
 void originalPlane(){
   loadPixels();
@@ -234,10 +247,10 @@ void drawPlane(int thickness) { //thickness radius
   //setting boundaries
   //while (true) {
     
-    int leftX = mouseX - thickness;
-    int upY = mouseY - thickness;
-    int rightX = mouseX + thickness;
-    int downY = mouseY + thickness;
+    int leftX = mouseX - thickness / 2;
+    int upY = mouseY - thickness / 2;
+    int rightX = mouseX + thickness / 2;
+    int downY = mouseY + thickness / 2;
     if (leftX < 750) {
       leftX = 750;
     }
@@ -253,7 +266,7 @@ void drawPlane(int thickness) { //thickness radius
     loadPixels();
     for (int x = leftX; x < rightX; x++) {
       for (int y = upY; y < downY; y++) {
-        if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness, 2)) {
+        if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness / 2, 2)) {
           imgAlt.pixels[x - 750 + y*img.width] = color(0);
           imgAltered = true;
         }
