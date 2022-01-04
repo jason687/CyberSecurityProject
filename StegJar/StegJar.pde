@@ -23,10 +23,12 @@ void setup() {
   Button right = new Button(1000, 800, "right");
   Button center = new Button(700, 800, "original image");
   Button pen = new Button(400, 900, "pen");
+  Button save = new Button (1000, 900, "save");
   buttons.add(left);
   buttons.add(right);
   buttons.add(center);
   buttons.add(pen);
+  buttons.add(save);
   background(0);
   fill(255, 0, 0); // control panel bg color
   stroke(255,0,0);
@@ -136,6 +138,13 @@ void mousePressed() {
       if (mouseY < buttons.get(3).getY() + 90 && mouseY > buttons.get(3).getY()) {
         if (mouseX < buttons.get(3).getX() + 90 && mouseX > buttons.get(3).getX()) {
           penToggle = !penToggle;
+        }
+      }
+      
+      //save
+      if (mouseY < buttons.get(4).getY() + 90 && mouseY > buttons.get(4).getY()) {
+        if (mouseX < buttons.get(4).getX() + 90 && mouseX > buttons.get(4).getX()) {
+          save();
         }
       }
       
@@ -266,38 +275,38 @@ void drawPlane(int thickness) { //thickness radius
   int upY = mouseY - thickness / 2;
   int rightX = mouseX + thickness / 2;
   int downY = mouseY + thickness / 2;
-  if (leftX < 750) {
-    leftX = 750;
+  if (leftX < 770) {
+    leftX = 770;
   }
-  if (upY < 0) {
-    upY = 0;
+  if (upY < 20) {
+    upY = 20;
   }
-  if (rightX > 1500) {
-    rightX = 1500;
+  if (rightX > 1480) {
+    rightX = 1480;
   }
-  if (downY > 750) {
-    downY = 750;
+  if (downY > 730) {
+    downY = 730;
   }
   loadPixels();
   for (int x = leftX; x < rightX; x++) {
     for (int y = upY; y < downY; y++) {
       if (Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2) <= Math.pow(thickness / 2, 2)) {
-        imgAlt.pixels[x - 1500 + y*img.width] = color(0); //wacky
+        imgAlt.pixels[x - 750 + y*img.width] = color(0); //wacky
         int i = x + y*img.width;
         int digit = (int) Math.pow(2, planecounter);
         switch (plane) {
           case 0: print("why would you do this?");
-          case 1: if (((int) red(i) & digit) / digit != ((int) imgAlt.pixels[i] / 255)) {
-                    img.pixels[i] = color(Integer.valueOf(((int) red(i) >> (planecounter + 1)) + "1" + ((int) red(i) % digit)), green(i), blue(i), alpha(i));
+          case 1: if (((int) red(img.pixels[i]) & digit) / digit != ((int) red(imgAlt.pixels[i]) / 255)) {
+                    img.pixels[i] = color((((int)red(img.pixels[i]) / (int)Math.pow(2, planecounter + 1)) * (int)Math.pow(2, planecounter + 1)) + (int)red(img.pixels[i]) % (int)Math.pow(2, planecounter), green(img.pixels[i]), blue(img.pixels[i]), alpha(img.pixels[i]));
                   }
-          case 2: if (((int) green(i) & digit) / digit != ((int) imgAlt.pixels[i] / 255)) {
-                    img.pixels[i] = color(red(i), Integer.valueOf(((int) green(i) >> (planecounter + 1)) + "1" + ((int) green(i) % digit)), blue(i), alpha(i));
+          case 2: if (((int) green(img.pixels[i]) & digit) / digit != ((int) green(imgAlt.pixels[i]) / 255)) {
+                    img.pixels[i] = color(red(img.pixels[i]), (((int)green(img.pixels[i]) / (int)Math.pow(2, planecounter + 1)) * (int)Math.pow(2, planecounter + 1)) + (int)green(img.pixels[i]) % (int)Math.pow(2, planecounter), blue(img.pixels[i]), alpha(img.pixels[i]));
                   }
-          case 3: if (((int) blue(i) & digit) / digit != ((int) imgAlt.pixels[i] / 255)) {
-                    img.pixels[i] = color(red(i), green(i), Integer.valueOf(((int) blue(i) >> (planecounter + 1)) + "1" + ((int) blue(i) % digit)), alpha(i));
+          case 3: if (((int) blue(img.pixels[i]) & digit) / digit != ((int) blue(imgAlt.pixels[i]) / 255)) {
+                    img.pixels[i] = color(red(img.pixels[i]), green(img.pixels[i]), (((int)blue(img.pixels[i]) / (int)Math.pow(2, planecounter + 1)) * (int)Math.pow(2, planecounter + 1)) + (int)blue(img.pixels[i]) % (int)Math.pow(2, planecounter), alpha(img.pixels[i]));
                   }
-          case 4: if (((int) alpha(i) & digit) / digit != ((int) imgAlt.pixels[i] / 255)) {
-                    img.pixels[i] = color(red(i), green(i), blue(i), Integer.valueOf(((int) alpha(i) >> (planecounter + 1)) + "1" + ((int) alpha(i) % digit)));
+          case 4: if (((int) alpha(img.pixels[i]) & digit) / digit != ((int) alpha(imgAlt.pixels[i] / 255))) {
+                    img.pixels[i] = color(red(img.pixels[i]), green(img.pixels[i]), blue(img.pixels[i]), (((int)alpha(img.pixels[i]) / (int)Math.pow(2, planecounter + 1)) * (int)Math.pow(2, planecounter + 1)) + (int)alpha(img.pixels[i]) % (int)Math.pow(2, planecounter));
                   }
         }
       }
@@ -328,4 +337,8 @@ void drawPlane(int thickness) { //thickness radius
   //  img.updatePixels();
   //  imgAltered = false;
   //}
+}
+
+void save() {
+  img.save("stegNew.png");
 }
