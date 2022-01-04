@@ -21,3 +21,15 @@ Ryan: Created buttons
 
 12/27
 Jason: Added functionality to button
+
+01/01
+Ryan: Implement very foundations of pen, gave full functionality to buttons for cycling between planes
+
+01/02
+Jason: Allowed pen to draw on only half of the sketch, very rudimentary
+
+01/03
+Jason: Started to implement ability to affect bit plane through pen; did not get far
+
+01/04 (technically)
+Jason: Ironed out the basic features of pen, some bugs passed through, created save button to port out image to check with outside tool
