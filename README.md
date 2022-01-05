@@ -4,22 +4,14 @@ This is an amazing name!
 ## Description
 Stegsolve but cooler! That's all you need to know...
 
-
-
-
-
-
-
-
-
-
-
 But in all seriousness it is just Stegsolve, but with the ability to alter the bit plane yourself!
 
 ## Directions
 Simply download the repository, and either:
 - Put an image into the repository and then running the makefile as such: ```makefile run $(ARG)="[INSERT_FILE_NAME_HERE]"```
-- Put the image file into the Stegjar folder and run the processing file normally. Don't draw on the original page, and you will be fine!
+- Put the image file into the Stegjar folder and run the processing file normally.
+
+Don't draw on the original page, and you will be fine!
 
 ## Log
 12/15/21
@@ -54,4 +46,4 @@ Jason: Allowed pen to draw on only half of the sketch, very rudimentary
 Jason: Started to implement ability to affect bit plane through pen; did not get far
 
 01/04 (technically)
-Jason: Ironed out the basic features of pen, some bugs passed through, created save button to port out image to check with outside tool
+Jason: Ironed out the basic features of pen, some bugs passed through, created save button to port out image to check with outside tool, README updates!
