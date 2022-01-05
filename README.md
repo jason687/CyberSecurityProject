@@ -18,8 +18,8 @@ But in all seriousness it is just Stegsolve, but with the ability to alter the b
 
 ## Directions
 Simply download the repository, and either:
-- put an image into the repository and then running the makefile as such: makefile run $(ARG)="[INSERT_FILE_NAME_HERE]"
-- put the image file into the Stegjar folder and run the processing file normally. Don't draw on the original page, and you will be fine!
+- Put an image into the repository and then running the makefile as such: ```makefile run $(ARG)="[INSERT_FILE_NAME_HERE]"```
+- Put the image file into the Stegjar folder and run the processing file normally. Don't draw on the original page, and you will be fine!
 
 ## Log
 12/15/21
