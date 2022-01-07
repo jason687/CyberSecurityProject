@@ -1,6 +1,9 @@
 # simpLi creating an amaZhang Stegsolve!
 This is an amazing name!
 
+## Presentation
+https://docs.google.com/presentation/d/1-tp8QL1x5r0zaWsKq0r2f4TlT6NbH9xiw0H0WPj8hZY/edit#slide=id.p
+
 ## Description
 Stegsolve but cooler! That's all you need to know...
 
